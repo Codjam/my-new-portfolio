@@ -81,67 +81,50 @@
 
 
 
-     // Initialize Firebase
-       var config = {
-         apiKey: "AIzaSyBJ3BKz-33EmJiPpg-pXvJNiUSXaSTYFwI",
-         authDomain: "contactformportfolio-8bb52.firebaseapp.com",
-         databaseURL: "https://contactformportfolio-8bb52.firebaseio.com",
-         projectId: "contactformportfolio-8bb52",
-         storageBucket: "contactformportfolio-8bb52.appspot.com",
-         messagingSenderId: "768198699806"
-       };
-       firebase.initializeApp(config);
-
-       // Reference messages collection
-       var messagesRef = firebase.database().ref('messages');
+    
 
 
-      //Listen for form submit
-      document.getElementById('contactform').addEventListener('submit',submitForm);
-
-     // Submit form
-      function submitForm(e){
-        e.preventDefault();
-
-        //Get values
-        var name = getInputVal('name');
-        var email = getInputVal('email');
-        var subject = getInputVal('subject');
-        var message = getInputVal('message');
-        var statusElm = $('.status')
-        statusElm.empty()
 
 
-        //Save message
-        saveMessage(name, email, subject, message);
-
-        //Show alert
-        document.querySelector('.alert').style.display = 'block';
 
 
-     //Hide alert after 3 seconds
-     setTimeout(function(){
-       document.querySelector('.alert').style.display = 'none';
 
-     },3000);
+    // Email/Form Functional
 
-      }
+    console.log("it works");
+$(document).ready(function() {
+  $('.submit').click(function(event) {
+    console.log('Clicked Button');
 
-      //function to get form values
-      function getInputVal(id){
-        return document.getElementById(id).value;
-      }
+    var email = $('.email').val()
+    var subject = $('.subject').val()
+    var message = $('.message').val()
+    var statusElm = $('.status')
+    statusElm.empty()
 
-      //Save message to firebase
-      function saveMessage(name, email, subject, message){
-        var newMessageRef = messagesRef.push();
-        newMessageRef.set({
-          name: name,
-          email: email,
-          subject: subject,
-          message: message
-        });
-      }
+    if (email.length > 5 && email.includes('@') && email.includes('.')) {
+      statusElm.append('<div>Email is valid</div>')
+    } else {
+      event.preventDefault()
+      statusElm.append('<div>Email is not valid</div>')
+    }
+
+    if (subject.length >= 2) {
+      statusElm.append('<div>Subject is valid</div>')
+    } else {
+      event.preventDefault()
+      statusElm.append('<div>Subject is not valid</div>')
+    }
+
+    if (message.length >= 10) {
+      statusElm.append('<div>Message is valid</div>')
+    } else {
+      event.preventDefault()
+      statusElm.append('<div>Message is not valid</div>')
+
+    }
+  })
+})
 
 
 
@@ -152,7 +135,13 @@
 
 
 
-    //Email/Form Functional
+
+
+
+
+
+
+
      // $(document).ready(function () {
      //   $('.submit').click(function (event) {
      //     event.preventDefault()
