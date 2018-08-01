@@ -1017,14 +1017,21 @@ h4.team-member-designation
 }
 
 
-.contact-form button.submit
+button.submit
 {
     font-size: 1.8rem;
     font-weight: 700;
     padding: 12px 43px;
     border: 1px solid black;
     border-radius: 0px;
+    background-color: #34495e;
+    color: #fff;
 }
+
+
+
+
+
 
 .alert
 {
